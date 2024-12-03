@@ -1,0 +1,2 @@
+jewelry-niche-main/node_modules
+jewelry-niche-server-develop/node_modules

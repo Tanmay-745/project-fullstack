@@ -1,0 +1,111 @@
+/* All header css styles here */
+.header {
+  height: 75px;
+  margin: 0;
+  background-color: #f8f9fa;
+}
+
+.logo {
+  width: 180px;
+}
+
+.nav-bar {
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bg-navbar {
+  padding-left: 12px;
+}
+
+.dashboard-box {
+  padding: 10px;
+  width: 250px;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.profile-info-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+#basic-nav-dropdown::after {
+  display: none;
+}
+
+.profile-info-body a {
+  text-decoration: none;
+  color: #22343d;
+}
+
+.hico {
+  color: #ff00b3;
+}
+.brand-text {
+  font-size: 28px; 
+  font-weight: bold;
+  color: #0f0f0e;
+  font-family: 'Vivaldi'; 
+}
+/* Light Theme Styles */
+.light-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.light-theme .navbar {
+  background-color: #f8f9fa;
+}
+
+.light-theme .nav-link {
+  color: #000000; /* Dark text for light theme */
+}
+
+.light-theme .nav-link:hover {
+  color: #007bff; /* Optional hover color in light theme */
+}
+
+/* Dark Theme Styles */
+.dark-theme {
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+.dark-theme .navbar {
+  background-color: #212529;
+}
+
+.dark-theme .nav-link {
+  color: #ffffff; /* Light text for dark theme */
+}
+
+.dark-theme .nav-link:hover {
+  color: #adb5bd; /* Optional hover color in dark theme */
+}
+
+/* Ensure the navbar brand remains visible in both themes */
+.brand-text {
+  color: inherit; /* Inherits from the current theme */
+}
+
+/* Ensure buttons have readable text in both themes */
+.theme-toggle-btn {
+  margin-left: 10px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+}
+
+.theme-toggle-btn:hover {
+  background-color: #0056b3;
+}
+
