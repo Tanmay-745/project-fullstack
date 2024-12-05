@@ -1,14 +1,15 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import "./Header.css";
+import { UserContext } from "../../../contexts/UserContext";
 
 const Header = () => {
   // import user and logout from useAuth
-  const { user, LogOut } = useAuth();
+  // const { user, LogOut } = useAuth();
 
   // Theme management state
   const [theme, setTheme] = useState("light");
@@ -16,6 +17,14 @@ const Header = () => {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
+
+  const { user } = useContext(UserContext)
+
+  const handleLogout= () => {
+    localStorage.removeItem("authToken")
+  }
+
+  console.log("User: ", user)
 
   return (
     <div className={`header sticky-top shadow-lg ${theme}-theme`}>
@@ -43,7 +52,7 @@ const Header = () => {
                 EXPLORE SHOP
               </Nav.Link>
               {/* user login manage menu here */}
-              {!user.email ? (
+              {!user ? (
                 <>
                   <Nav.Link as={Link} to="/login">
                     <Button className="btn btn-regular">Sign in</Button>
@@ -105,7 +114,7 @@ const Header = () => {
                       <hr />
                       <div className="profile-info-body">
                         <p>
-                          <Link to="/" onClick={LogOut}>
+                          <Link to="/" onClick={handleLogout}>
                             <LogoutIcon /> Logout
                           </Link>
                         </p>

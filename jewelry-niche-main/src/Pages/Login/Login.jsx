@@ -5,10 +5,14 @@ import { useForm } from "react-hook-form";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import "./Login.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" })
+  const [error, setError] = useState('')
+  const {user, setUser} = useContext(UserContext)
+  
   // import data from useAuth, useLocation and useHistory.
   // const {
   //   loginWithEmailPassword,
@@ -36,15 +40,21 @@ const Login = () => {
       headers: {
         "Content-Type": "application/json"
       },
+      credentials: "include",
       body: JSON.stringify({
-        email: formData.email, password:  formData.password
+        email: formData.email, password: formData.password
       })
     })
     const dataJson = await response.json()
-    console.log("dataJson: ", dataJson) 
-    if(response.status == 200){
+    console.log("dataJson: ", dataJson)
+    if (response.status == 200) {
       // alert("Login Okkkk")
-      
+      localStorage.setItem("authToken", dataJson.token)
+      setUser(false)
+      setError("")
+    }
+    else {
+      setError(dataJson.msg)
     }
     // loginWithEmailPassword(data.email, data.password, location, history);
   };
@@ -116,7 +126,8 @@ const Login = () => {
                 {/* {user?.email && (
                   <Alert severity='success'>User Login successfully!</Alert>
                 )}
-                {error && <Alert severity='error'>{error}</Alert>} */}
+                 */}
+                {error && <Alert severity='error'>{error}</Alert>}
               </div>
             </div>
           </div>

@@ -2,7 +2,9 @@ const { ObjectId } = require('mongodb');
 const { getDatabase } = require('../../config/db.config');
 const { UserModel } = require('../models/allModels');
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 
+const JWT_SECRET = "LJKsdfjlk$K#@$J#@JLKJLKFJLKSFD"
 
 
 exports.userLogin = async (req, res) => {
@@ -15,7 +17,13 @@ exports.userLogin = async (req, res) => {
   const result = await bcrypt.compare(password, user.password)
   // console.log("result: ", result)
   if (result) {
-    return res.status(200).json({ msg: "Login Successfull" })
+    const token = await jwt.sign({ email: user.email }, JWT_SECRET)
+    res.cookie("authToken", token, {
+      httpOnly: true,
+      secure: false,
+      maxAge: 1000 * 24* 60 * 60
+    })
+    return res.status(200).json({ msg: "Login Successfull", token: token })
   }
   return res.status(401).json({ msg: "Invalid Credentials" })
 }
