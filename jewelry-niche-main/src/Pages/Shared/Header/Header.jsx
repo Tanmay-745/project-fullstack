@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import "./Header.css";
 import { UserContext } from "../../../contexts/UserContext";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Header = () => {
   // import user and logout from useAuth
@@ -18,10 +19,15 @@ const Header = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
-  const { user } = useContext(UserContext)
+  const { user, logout } = useContext(UserContext)
+  console.log("user: ", user)
 
+  const history = useHistory();
   const handleLogout= () => {
     localStorage.removeItem("authToken")
+    history.push("/")
+    logout()
+
   }
 
   console.log("User: ", user)

@@ -16,11 +16,13 @@ const Order = () => {
 
   //   fetch singleProduct from API and set
   const [singleProduct, setSingleProduct] = useState({});
-  useEffect(() => {
-    fetch(`https://jewelry-niche-server.vercel.app/jewelry/${id}`)
-      .then((response) => response.json())
-      .then((data) => setSingleProduct(data));
-  }, [id]);
+  // useEffect(() => {
+  //   fetch(`https://jewelry-niche-server.vercel.app/jewelry/${id}`)
+  //     .then((response) => response.json())
+  //     .then((data) => setSingleProduct(data));
+  // }, [id]);
+
+  
 
   //   Use form hooks function
   const { register, handleSubmit } = useForm();

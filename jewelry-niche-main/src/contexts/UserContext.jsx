@@ -14,7 +14,17 @@ const UserContextProvider = ({ children }) => {
     }
     const logout = () => {
         localStorage.removeItem("authToken")
+        setUser(false)
     }
+    useEffect(() => {
+        if(localStorage.getItem("authToken")){
+            setUser(true)
+        }
+        else{
+            setUser(false)
+        }
+        // setUser()        
+    }, [])
     return (
         <UserContext.Provider value={{ user, setUser, login, logout }}>
             {children}

@@ -2,7 +2,7 @@ import { Alert, CircularProgress } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useForm } from "react-hook-form";
-import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { NavLink, useHistory, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import "./Login.css";
 import { useContext, useState } from "react";
@@ -12,6 +12,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" })
   const [error, setError] = useState('')
   const {user, setUser} = useContext(UserContext)
+  const history = useHistory();
   
   // import data from useAuth, useLocation and useHistory.
   // const {
@@ -50,8 +51,9 @@ const Login = () => {
     if (response.status == 200) {
       // alert("Login Okkkk")
       localStorage.setItem("authToken", dataJson.token)
-      setUser(false)
+      setUser(true)
       setError("")
+      history.push("/")
     }
     else {
       setError(dataJson.msg)
